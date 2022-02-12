@@ -1,3 +1,4 @@
+// Countries who does not any single order
 
 select Country, count(*) orders
 from
@@ -10,12 +11,11 @@ group by customerId ) ORD INNER JOIN CUSTOMERs CUST
 on ORD.CustomerID = CUST.customerID
 )
 group by country
+union
+
+select country, 0 orders from customers where customerid not in (select distinct CustomerID from orders) group by country
+
 order by orders desc
 
---select customerName, country
---from Customers
-
-
---INNER JOIN Customers
---ON Orders.CustomerID=Customers.CustomerID
+--select country, count(1) from customers where customerid not in (select distinct CustomerID from orders) group by country
 ;
