@@ -1,0 +1,21 @@
+
+select Country, count(*) orders
+from
+(select * from
+(
+SELECT Orders.customerId,  count(*) orders
+--Customers.CustomerName,
+FROM Orders
+group by customerId ) ORD INNER JOIN CUSTOMERs CUST
+on ORD.CustomerID = CUST.customerID
+)
+group by country
+order by orders desc
+
+--select customerName, country
+--from Customers
+
+
+--INNER JOIN Customers
+--ON Orders.CustomerID=Customers.CustomerID
+;
